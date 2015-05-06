@@ -40,6 +40,7 @@ server.websocketHandler(function(socket) {
     registerWebSocketForTopic('fx.historic.tick', socket);
     registerWebSocketForTopic('fx.historic.position', socket);
     registerWebSocketForTopic('timer.tick', socket);
+    registerWebSocketForTopic('sentiment.event', socket);
   }
 
 });
