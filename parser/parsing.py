@@ -6,6 +6,7 @@ LIVE = False
 
 def parse(items, threshold):
     for item in items:
+
         if item['sentiment'][0] > 0:
             item['type'] = 'buy'
             item['confidence'] = item['sentiment'][0] * 100
@@ -17,13 +18,13 @@ def parse(items, threshold):
         if item['sentiment'][0] == 0:
             item['confidence'] = 0
 
+        print(item['timestamp'],item['source'],item['type'],item['confidence'],item['description'])
         if item['confidence'] > threshold:
-            print(item['timestamp'],item['source'],item['type'],item['confidence'],item['description'])
+            print('POSTED')
+            #print(item['timestamp'],item['source'],item['type'],item['confidence'],item['description'])
             if LIVE:
                 events.post(**item)
 
 if __name__ == '__main__':
-    #parse(events.usa_today('jobs','2015-01-01','2015-04-02'),20)
-
+    #print(parse(events.usa_today('jobs','2015-01-01','2015-04-02'),20))
     print(parse(events.xignite('1/1/2015','4/2/2015'),20))
-    

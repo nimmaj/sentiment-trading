@@ -5,6 +5,18 @@ import urllib
 from pattern.en import sentiment
 from pattern.web import Element
 from datetime import datetime
+from textblob import TextBlob
+from textblob.sentiments import NaiveBayesAnalyzer
+
+def NaiveBayesAnalyzerParser(text):
+    sentiment = TextBlob(text, analyzer=NaiveBayesAnalyzer()).sentiment
+    #Sentiment(classification='pos', p_pos=0.6023632501327671, p_neg=0.3976367498672331)
+    #print(sentiment)
+    subjectivity = 1 - (max(sentiment.p_pos,sentiment.p_neg) - min(sentiment.p_pos,sentiment.p_neg))
+    if sentiment.classification == 'pos':
+        return (sentiment.p_pos, subjectivity)
+    else:
+        return (sentiment.p_neg*-1, subjectivity)
 
 def post(**kwargs):
     # Post sentiment event to Sentiment Engine
@@ -62,7 +74,7 @@ def xignite(start, end):
             'description': text,
             'source': 'xignite-' + headline['Source'],
             'author':'rick-xignite', 
-            'sentiment': sentiment(text)
+            'sentiment': NaiveBayesAnalyzerParser(text)
         }]
     return response 
 
@@ -91,7 +103,7 @@ def usa_today(keyword, start, end, section='money'):
             'description': text,
             'source':'usa_today',
             'author':'rick', 
-            'sentiment': sentiment(text)
+            'sentiment': NaiveBayesAnalyzerParser(text)
         }]
     return response
 
@@ -130,7 +142,7 @@ def googletrends(keywords, start_month, start_year, duration=12, geo="US"):
             'description': text,
             'source':'google',
             'author':'zhuangy', 
-            'sentiment': sentiment(text)
+            'sentiment': NaiveBayesAnalyzerParser(text)
         }]
         previousnumber = int(number)
     #print len(response)
@@ -202,7 +214,7 @@ def googlenews(keyword, start, end):
                     'description': text,
                     'source': metadata[0],
                     'author':'zhuangy', 
-                    'sentiment': sentiment(text)
+                    'sentiment': NaiveBayesAnalyzerParser(text)
                      }]
         previoustitle = title
         pagenumber= pagenumber+10
@@ -245,7 +257,7 @@ def newslookup(keyword, year):
                 'description': text,
                 'source':"newslookup",
                 'author':'zhuangy', 
-                'sentiment': sentiment(text)
+                'sentiment': NaiveBayesAnalyzerParser(text)
             }]
 
         pagenumber=pagenumber+1
@@ -258,6 +270,9 @@ if __name__ == '__main__':
     now = datetime.now().isoformat(' ')
 
     requests.packages.urllib3.disable_warnings()
+
+    assert NaiveBayesAnalyzerParser('1000 jobs created') == (0.5621958115394713, 0.8756083769210568)
+    assert NaiveBayesAnalyzerParser('1000 jobs lost') == (-0.5422292136758547, 0.9155415726482906)
 
     assert post(author='rick',source='test_source',type='buy',confidence=50,description='unit test post',timestamp=now)
     assert oanda('EUR_USD')
