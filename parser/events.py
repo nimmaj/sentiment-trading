@@ -51,13 +51,14 @@ def xignite(start, end):
     headlines = r.json()['Headlines']
     response = []
     for headline in headlines:
+        #print(headline)
         date = datetime.strptime(headline['Date'] + ' ' + headline['Time'], '%m/%d/%Y %I:%M %p')
         text = headline['Title']
         response += [{
             'timestamp': date.isoformat(' '),
             'description': text,
-            'source':'xignite',
-            'author':'rick', 
+            'source': 'xignite-' + headline['Source'],
+            'author':'rick-xignite', 
             'sentiment': sentiment(text)
         }]
     return response 
@@ -67,6 +68,7 @@ def usa_today(keyword, start, end, section='money'):
     url = 'http://api.usatoday.com/open/articles'
     payload = {
         'section': section,
+        'count': 200,
         'keyword': keyword,
         'fromdate' : start,
         'todate': end,
