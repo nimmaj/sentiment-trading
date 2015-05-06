@@ -28,7 +28,9 @@ vertx.fileSystem.readFile(config.secretFile, function(err, res) {
       console.log('got a historic tick request' + JSON.stringify(event));
 
       var inst = event.instrument;
-      var start = encodeURIComponent(moment(event.date).format('YYYY-MM-DDTHH:mm:ss')+'Z');
+      var date = event.date;
+
+      var start = encodeURIComponent(moment(date).format('YYYY-MM-DDTHH:mm:ss')+'Z');
       var path = '/v1/candles?accountId='+secret.accountId+'&instrument='+inst+'&count=1&start='+start;
       // var encodedPath = encodeURIComponent(path);
       //console.log(path);
