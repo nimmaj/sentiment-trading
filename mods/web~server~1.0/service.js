@@ -34,19 +34,28 @@ routeMatcher.noMatch(function(req) {
 
 server.websocketHandler(function(socket) {
 
-  var ebHandler = function(tick) {
+  if (socket.path() === '/liveStream') {
+    registerWebSocketForTopic('fx.tick', socket);
+  } else if (socket.path() === '/presentationStream') {
+    registerWebSocketForTopic('fx.historic.tick', socket);
+  }
+
+});
+
+function registerWebSocketForTopic(topic, socket) {
+  var streamHandler = function(tick) {
     var tickStr = JSON.stringify(tick);
     //console.log('ws: ' + tickStr);
     socket.writeTextFrame(tickStr);
   }
 
-  eb.registerHandler('fx.tick', ebHandler);
+  eb.registerHandler(topic, streamHandler);
 
   socket.closeHandler(function() {
-    eb.unregisterHandler('fx.tick',ebHandler);
+    console.log('unregistering '+topic+' handler');
+    eb.unregisterHandler(topic,streamHandler);
   });
-
-});
+}
 
 server.requestHandler(routeMatcher).listen(config.port, config.host, function(err) {
   if (err) {

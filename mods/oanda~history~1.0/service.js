@@ -27,40 +27,29 @@ vertx.fileSystem.readFile(config.secretFile, function(err, res) {
       var start = encodeURIComponent(moment(event).format('YYYY-MM-DDTHH:mm:ss')+'Z');
       var path = '/v1/candles?accountId='+secret.accountId+'&instrument=GBP_USD&count=1&start='+start;
       // var encodedPath = encodeURIComponent(path);
-      console.log(path);
+      //console.log(path);
       var request = client.get(path, function(resp) {
 
         resp.dataHandler(function(buffer) {
-          console.log('[' + buffer.toString().trim() + ']');
-          // var data = buffer.toString().split('\n');
-          // data.forEach(function(message) {
-          //   if (message.trim().length > 0) {
-          //     var jm = JSON.parse(message);
-          //     if (jm.tick) {
-          //       ticks[jm.tick.instrument] = jm.tick;
-          //     }
-          //   }
-          // });
+          // console.log('[' + buffer.toString().trim() + ']');
+          var data = JSON.parse(buffer.toString().trim());
+          // console.log(data.candles[0].openBid);
+
+          var candle = data.candles[0];
+
+          var message = {
+            "instrument": data.instrument,
+            "bid": candle.openBid,
+            "ask": candle.openAsk,
+            "time": candle.time
+          }
+
+          eb.publish('fx.historic.tick', message);
         });
 
       }).putHeader("Authorization", auth).end();
 
     });
 
-
-
-
-    //
-    //
-    //
-    // console.log('about to create request...');
-  //
-  //
-  //   // var streamTimer = vertx.setPeriodic(1000, function(timerId) {
-  //   //   for (var key in ticks) {
-  //   //     eb.publish('fx.tick', ticks[key]);
-  //   //   }
-  //   // });
-  //
   }
 });

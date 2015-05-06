@@ -1,12 +1,14 @@
-var connection = new WebSocket('ws://' + location.hostname + ':' + location.port);
-connection.onmessage = tickReceived;
-console.log("created websocket");
+function connectToSocket(wsPath) {
+  var connection = new WebSocket('ws://' + location.hostname + ':' + location.port + wsPath);
+  connection.onmessage = tickReceived;
+  console.log("created websocket on "+ wsPath);
+}
 
 var graphs = new Map();
 
 function tickReceived(tickMessage) {
   var tick = JSON.parse(tickMessage.data);
-  
+
   if (!graphs.has(tick.instrument)) {
     console.log("adding new graph section for: "+tick.instrument);
 
