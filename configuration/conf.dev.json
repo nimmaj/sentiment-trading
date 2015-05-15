@@ -12,5 +12,6 @@
     "address": "mongo.sentiment",
     "db_name": "sentiment_db",
     "use_mongo_types": "true"
-  }
+  },
+  "mode": "test"
 }
