@@ -18,7 +18,7 @@ work out how to do historic rates and to "replay" streaming at a specific pace
 
 make trade?
 
-
+extract api keys and check in config
 
 
 
@@ -26,3 +26,9 @@ use cases:
 
  - normal streaming case with rest for harvesting
  - replay mode - (from here to here)
+
+
+
+
+
+mongod --dbpath ./db/

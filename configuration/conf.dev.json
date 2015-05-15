@@ -1,0 +1,15 @@
+{
+  "stream": {
+    "secretFile": "conf/secret.json",
+    "url": "stream-fxpractice.oanda.com",
+    "port": 443
+  },
+  "web": {
+    "port": 8080,
+    "host": "localhost"
+  },
+  "mongo": {
+    "db_name": "hack_db",
+    "use_mongo_types": "true"
+  }
+}
