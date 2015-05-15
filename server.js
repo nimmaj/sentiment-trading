@@ -9,7 +9,7 @@ depMod('web~server~1.0', config.web);
 depMod('io.vertx~mod-mongo-persistor~2.1.0', config.mongo);
 depMod('sentiment~repository~1.0', config.mongo);
 
-if (config.mode === "test") {
+if (config.sendTestMessages === true) {
   depMod('sentiment~tester~1.0', config.web);
 }
 

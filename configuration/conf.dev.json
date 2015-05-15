@@ -13,5 +13,5 @@
     "db_name": "sentiment_db",
     "use_mongo_types": "true"
   },
-  "mode": "test"
+  "sendTestMessages": false
 }
