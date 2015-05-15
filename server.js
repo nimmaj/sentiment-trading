@@ -6,11 +6,9 @@ var config = container.config;
 
 depMod('oanda~stream~1.0', config.stream);
 depMod('web~server~1.0', config.web);
+depMod('io.vertx~mod-mongo-persistor~2.1.0', config.mongo);
 
-// container.deployModule('io.vertx~mod-mongo-persistor~2.1.0', config.mongo(err) {
-//
-// });
-
+// anyone else think that container.deployModule ought to do this?!!
 function depMod(name, conf) {
   container.deployModule(name, conf, function(err) {
     if (err) {

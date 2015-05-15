@@ -1,2 +1,3 @@
 
 mods/oanda~stream~1.0/conf/secret.json
+mods/io.vertx~mod-mongo-persistor~2.1.0
