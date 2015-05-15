@@ -11,8 +11,14 @@ var server = vertx.createHttpServer();
 
 var routeMatcher = new vertx.RouteMatcher();
 
-routeMatcher.get('/postSentiment', function(req) {
-  console.log('post sentiment');
+routeMatcher.post('/postSentiment', function(req) {
+
+  req.bodyHandler(function(body) {
+    console.log(body.toString());
+  });
+
+  req.response.end();
+
 });
 
 routeMatcher.noMatch(function(req) {
@@ -29,7 +35,7 @@ server.websocketHandler(function(socket) {
 
   var ebHandler = function(tick) {
     var tickStr = JSON.stringify(tick);
-    console.log('ws: ' + tickStr);
+    //console.log('ws: ' + tickStr);
     socket.writeTextFrame(tickStr);
   }
 
