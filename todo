@@ -6,7 +6,7 @@ get it running in the cloud
 
 dockerfy it
 
-rest i/f to store messages into
+message checking - make sure we're storing something sensible
 
 some sort of time service
 
@@ -39,7 +39,7 @@ done:
 check in to repo
 extract api keys and check in config
 get mongo up and running and get something into it
-
+rest i/f to store messages into
 
 plan
 ----
