@@ -1,4 +1,4 @@
-# gonehacking-prehack
+# Sentiment Trading
 
 You need a file in mods/oanda~stream~1.0/conf called secret.json of the form:
 
