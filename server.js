@@ -8,6 +8,7 @@ depMod('oanda~stream~1.0', config.stream);
 depMod('web~server~1.0', config.web);
 depMod('io.vertx~mod-mongo-persistor~2.1.0', config.mongo);
 depMod('sentiment~tester~1.0', config.web);
+depMod('sentiment~repository~1.0', config.mongo);
 
 // anyone else think that container.deployModule ought to do this?!!
 function depMod(name, conf) {

@@ -9,7 +9,8 @@
     "host": "localhost"
   },
   "mongo": {
-    "db_name": "hack_db",
+    "address": "mongo.sentiment",
+    "db_name": "sentiment_db",
     "use_mongo_types": "true"
   }
 }

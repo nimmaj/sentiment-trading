@@ -23,9 +23,8 @@ var thingToSend = {
 }
 
 var streamTimer = vertx.setPeriodic(3000, function(timerId) {
-  console.log('wibble');
+  thingToSend.timestamp = moment();
   client.post("/postSentiment", function(resp) {
     console.log('posted: '+resp.statusCode() + ' ' + resp.statusMessage());
-
   }).end(JSON.stringify(thingToSend));
 });

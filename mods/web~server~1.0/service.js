@@ -14,7 +14,8 @@ var routeMatcher = new vertx.RouteMatcher();
 routeMatcher.post('/postSentiment', function(req) {
 
   req.bodyHandler(function(body) {
-    console.log(body.toString());
+    eb.publish('sentiment.event', JSON.parse(body.toString()));
+    // console.log(body.toString());
   });
 
   req.response.end();
