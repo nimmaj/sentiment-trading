@@ -12,23 +12,32 @@ function tickReceived(tickMessage) {
       console.log("adding new graph section for: "+tick.instrument);
 
       var graphElement = document.getElementById("rateGraphs");
-      var newGraphDiv = document.createElement("div");
+      var newRow = document.createElement("div");
+      newRow.setAttribute("class","row");
 
-      var titleDiv = document.createElement("div");
+      var newGraphDiv = divWithClass("col-md-8");
+
+      var titleDiv = document.createElement("h5");
       var title = document.createTextNode(tick.instrument);
       titleDiv.appendChild(title);
 
       var graphDiv = document.createElement("div");
+
       var graphCanvas = document.createElement("canvas");
       graphCanvas.setAttribute("id", tick.instrument);
-      graphCanvas.setAttribute("width", 600);
+      graphCanvas.setAttribute("width", 660);
       graphCanvas.setAttribute("height", 150);
       graphDiv.appendChild(graphCanvas);
 
       newGraphDiv.appendChild(titleDiv);
       newGraphDiv.appendChild(graphDiv);
 
-      graphElement.appendChild(newGraphDiv);
+      newRow.appendChild(divWithClass("col-md-2"));
+      newRow.appendChild(newGraphDiv);
+      newRow.appendChild(divWithClass("col-md-2"));
+
+      graphElement.appendChild(newRow);
+
 
       var ts = {
         bid: new TimeSeries(),
@@ -51,4 +60,10 @@ function tickReceived(tickMessage) {
     timeSeries.bid.append(new Date().getTime(), tick.bid);
     timeSeries.ask.append(new Date().getTime(), tick.ask);
   // }
+}
+
+function divWithClass(className) {
+  var div = document.createElement("div");
+  div.setAttribute("class",className);
+  return div;
 }
