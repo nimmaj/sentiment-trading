@@ -1,4 +1,4 @@
-check in to repo
+port over to rbs hackathon user
 
 make the css in the page a bit nicer - switch away from cover to something else
 
@@ -18,7 +18,8 @@ work out how to do historic rates and to "replay" streaming at a specific pace
 
 make trade?
 
-extract api keys and check in config
+work out how to get the data out of mongo and into the repo
+
 
 
 
@@ -32,3 +33,10 @@ use cases:
 
 
 mongod --dbpath ./db/
+
+
+
+done:
+
+check in to repo
+extract api keys and check in config

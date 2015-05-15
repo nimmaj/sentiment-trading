@@ -4,18 +4,19 @@ var console = require('vertx/console');
 
 var config = container.config;
 
-container.deployModule('oanda~stream~1.0', config.stream, function(err) {
-  if (!err) {
-    console.log('deployed oanda stream 1.0');
-  } else {
-    console.log(err.getMessage());
-  }
-});
+depMod('oanda~stream~1.0', config.stream);
+depMod('web~server~1.0', config.web);
 
-container.deployModule('web~server~1.0', config.web, function(err) {
-  if (!err) {
-    console.log('deployed web server 1.0');
-  } else {
-    console.log(err.getMessage());
-  }
-});
+// container.deployModule('io.vertx~mod-mongo-persistor~2.1.0', config.mongo(err) {
+//
+// });
+
+function depMod(name, conf) {
+  container.deployModule(name, conf, function(err) {
+    if (err) {
+      console.log(err.getMessage());
+    } else {
+      console.log('deployed module: ' + name);
+    }
+  });
+}
