@@ -40,3 +40,22 @@ done:
 
 check in to repo
 extract api keys and check in config
+
+
+plan
+----
+
+real time:
+
+  events get put on a bus (by the sentiment doodah) - poss from rest
+  events get pulled off the buss and recorded in the db
+  we pick up the events in the trade module and trade <- don't actually need to trade
+  position server keeps track?  or trade module does
+
+play back
+
+  need a way of getting market onto bus - maybe oanda historic stream or something - might need to pre-record
+  time service to broadcast time
+  historic event player gets the events out of the db for the time period and publishes to the bus
+  historic stream pumps events on for the broadcast time
+  trade module uses both to work out position
