@@ -1,0 +1,4 @@
+{
+  "main": "server.js",
+  "deploys": "oanda~stream~1.0, web~server~1.0, io.vertx~mod-mongo-persistor~2.1.0"
+}

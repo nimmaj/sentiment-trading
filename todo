@@ -1,0 +1,28 @@
+check in to repo
+
+make the css in the page a bit nicer - switch away from cover to something else
+
+get it running in the cloud
+
+dockerfy it
+
+get mongo up and running and get something into it
+
+rest i/f to store messages into
+
+some sort of time service
+
+display position
+
+work out how to do historic rates and to "replay" streaming at a specific pace
+
+make trade?
+
+
+
+
+
+use cases:
+
+ - normal streaming case with rest for harvesting
+ - replay mode - (from here to here)
