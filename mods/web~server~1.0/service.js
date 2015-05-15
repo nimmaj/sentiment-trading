@@ -9,7 +9,13 @@ console.log('starting web server');
 
 var server = vertx.createHttpServer();
 
-server.requestHandler(function(req) {
+var routeMatcher = new vertx.RouteMatcher();
+
+routeMatcher.get('/postSentiment', function(req) {
+  console.log('post sentiment');
+});
+
+routeMatcher.noMatch(function(req) {
   var file = '';
   if (req.path() == '/') {
     file = 'index.html';
@@ -35,7 +41,7 @@ server.websocketHandler(function(socket) {
 
 });
 
-server.listen(config.port, config.host, function(err) {
+server.requestHandler(routeMatcher).listen(config.port, config.host, function(err) {
   if (err) {
     console.log(err);
   } else {
