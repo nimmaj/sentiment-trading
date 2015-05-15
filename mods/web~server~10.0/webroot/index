@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,8 +38,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./index.html">Home</a></li>
-            <li class="active"><a href="./streamingRates.html">RateStream</a></li>
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="./streamingRates">RateStream</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -50,9 +51,13 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Streaming Live FX Rates</h1>
-        <div class="inner" id="rateGraphs">
-        </div>
+        <h1>Sentiment FX Trading</h1>
+        <p>One of the biggest days in the FX trading calendar is the US non-farm payroll day.  RBS does many thousands of trades in the
+        moments after the announcement.</p>
+        <p>Non-farm payroll is essentially about jobs.  This is something that you can find out about from social media - people talk about
+        losing jobs.</p>
+        <p>Logically we ought to be able to use this to take a position in fx.
+        </p>
       </div>
 
     </div> <!-- /container -->
@@ -61,9 +66,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/smoothie.js"></script>
-    <script type="text/javascript" src="./js/tickStream.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
   </body>
 </html>
