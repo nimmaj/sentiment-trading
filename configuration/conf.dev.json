@@ -4,6 +4,11 @@
     "url": "stream-fxpractice.oanda.com",
     "port": 443
   },
+  "history": {
+    "secretFile": "conf/secret.json",
+    "url": "api-fxpractice.oanda.com",
+    "port": 443
+  },
   "web": {
     "port": 8080,
     "host": "localhost"
@@ -13,5 +18,7 @@
     "db_name": "sentiment_db",
     "use_mongo_types": "true"
   },
-  "sendTestMessages": false
+  "sendTestMessages": false,
+  "mainStuff": false,
+  "startHistory": true
 }
