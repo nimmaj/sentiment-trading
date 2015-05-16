@@ -18,7 +18,13 @@
     "db_name": "sentiment_db",
     "use_mongo_types": "true"
   },
+  "time": {
+    "startTime": "2015-04-03T12:00",
+    "period": 5,
+    "timeMode": "live"
+  },
   "sendTestMessages": false,
   "mainStuff": false,
-  "startHistory": true
+  "startHistory": false,
+  "startTime": true
 }

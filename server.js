@@ -4,30 +4,29 @@ var console = require('vertx/console');
 
 var config = container.config;
 
-if (config.mainStuff === true) {
-  depMod('oanda~stream~1.0', config.stream);
-  depMod('web~server~1.0', config.web);
-  depMod('io.vertx~mod-mongo-persistor~2.1.0', config.mongo);
-  depMod('sentiment~repository~1.0', config.mongo);
-}
+depMod('oanda~stream~1.0', config.stream, config.mainStuff);
+depMod('web~server~1.0', config.web, config.mainStuff);
+depMod('io.vertx~mod-mongo-persistor~2.1.0', config.mongo, config.mainStuff);
+depMod('sentiment~repository~1.0', config.mongo, config.mainStuff);
 
-if (config.sendTestMessages === true) {
-  depMod('sentiment~tester~1.0', config.web);
-}
+depMod('sentiment~tester~1.0', config.web, config.sendTestMessages);
+depMod('oanda~history~1.0', config.history, config.startHistory);
 
-if (config.startHistory === true) {
-  depMod('oanda~history~1.0', config.history);
-}
+depMod('time~server~1.0', config.time, config.startTime);
 
 // anyone else think that container.deployModule ought to do this?!!
-function depMod(name, conf) {
-  console.log('starting '+name+' with config: ');
-  console.log(conf);
-  container.deployModule(name, conf, function(err) {
-    if (err) {
-      console.log(err.getMessage());
-    } else {
-      console.log('deployed module: ' + name);
-    }
-  });
+function depMod(name, conf, shouldStart) {
+  if (!shouldStart) {
+    console.log('not starting '+name);
+  } else {
+    console.log('starting '+name+' with config: ');
+    console.log(conf);
+    container.deployModule(name, conf, function(err) {
+      if (err) {
+        console.log(err.getMessage());
+      } else {
+        console.log('deployed module: ' + name);
+      }
+    });
+  }
 }
