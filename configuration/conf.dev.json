@@ -24,7 +24,7 @@
     "timeMode": "historic"
   },
   "sendTestMessages": false,
-  "mainStuff": false,
-  "startHistory": true,
-  "startTime": true
+  "mainStuff": true,
+  "startHistory": false,
+  "startTime": false
 }

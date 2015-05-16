@@ -1,4 +1,4 @@
-var connection = new WebSocket('ws://' + location.hostname + ':' + location.port);
+var connection = new WebSocket('ws://' + location.hostname + ':' + location.port + '/liveStream');
 connection.onmessage = tickReceived;
 console.log("created websocket");
 
@@ -6,7 +6,7 @@ var graphs = new Map();
 
 function tickReceived(tickMessage) {
   var tick = JSON.parse(tickMessage.data);
-  
+
   if (!graphs.has(tick.instrument)) {
     console.log("adding new graph section for: "+tick.instrument);
 

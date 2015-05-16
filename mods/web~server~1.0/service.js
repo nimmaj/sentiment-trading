@@ -34,17 +34,24 @@ routeMatcher.noMatch(function(req) {
 
 server.websocketHandler(function(socket) {
 
-  var ebHandler = function(tick) {
-    var tickStr = JSON.stringify(tick);
-    //console.log('ws: ' + tickStr);
-    socket.writeTextFrame(tickStr);
+  if (socket.path() === '/liveStream') {
+
+    var streamHandler = function(tick) {
+      var tickStr = JSON.stringify(tick);
+      //console.log('ws: ' + tickStr);
+      socket.writeTextFrame(tickStr);
+    }
+
+    eb.registerHandler('fx.tick', streamHandler);
+
+    socket.closeHandler(function() {
+      console.log('unregistering streaming handler');
+      eb.unregisterHandler('fx.tick',streamHandler);
+    });
+
+  } else if (socket.path() === '/presentationStream') {
+    console.log('presentationStream');
   }
-
-  eb.registerHandler('fx.tick', ebHandler);
-
-  socket.closeHandler(function() {
-    eb.unregisterHandler('fx.tick',ebHandler);
-  });
 
 });
 
