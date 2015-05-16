@@ -9,7 +9,7 @@ var config = container.config;
 console.log('starting sentiment repository...');
 
 eb.registerHandler('sentiment.event', function(message) {
-  console.log(JSON.stringify(message));
+  console.log('storing: '+JSON.stringify(message));
 
   var mm = {
     "action": "save",
