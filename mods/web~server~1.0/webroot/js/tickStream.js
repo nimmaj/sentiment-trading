@@ -1,6 +1,8 @@
-var connection = new WebSocket('ws://' + location.hostname + ':' + location.port + '/liveStream');
-connection.onmessage = tickReceived;
-console.log("created websocket");
+function connectToSocket(wsPath) {
+  var connection = new WebSocket('ws://' + location.hostname + ':' + location.port + wsPath);
+  connection.onmessage = tickReceived;
+  console.log("created websocket on "+ wsPath);
+}
 
 var graphs = new Map();
 
