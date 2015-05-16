@@ -25,6 +25,6 @@
   },
   "sendTestMessages": false,
   "mainStuff": true,
-  "startHistory": false,
-  "startTime": false
+  "startHistory": true,
+  "startTime": true
 }

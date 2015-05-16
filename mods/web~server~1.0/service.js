@@ -37,7 +37,7 @@ server.websocketHandler(function(socket) {
   if (socket.path() === '/liveStream') {
     registerWebSocketForTopic('fx.tick', socket);
   } else if (socket.path() === '/presentationStream') {
-    registerWebSocketForTopci('fx.historic.tick', socket);
+    registerWebSocketForTopic('fx.historic.tick', socket);
   }
 
 });

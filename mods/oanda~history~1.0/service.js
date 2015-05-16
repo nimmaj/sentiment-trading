@@ -27,7 +27,7 @@ vertx.fileSystem.readFile(config.secretFile, function(err, res) {
       var start = encodeURIComponent(moment(event).format('YYYY-MM-DDTHH:mm:ss')+'Z');
       var path = '/v1/candles?accountId='+secret.accountId+'&instrument=GBP_USD&count=1&start='+start;
       // var encodedPath = encodeURIComponent(path);
-      console.log(path);
+      //console.log(path);
       var request = client.get(path, function(resp) {
 
         resp.dataHandler(function(buffer) {
