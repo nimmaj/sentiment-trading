@@ -4,11 +4,11 @@ var console = require('vertx/console');
 
 var config = container.config;
 
-depMod('oanda~stream~1.0', config.stream, config.mainStuff);
-depMod('web~server~1.0', config.web, config.mainStuff);
-depMod('io.vertx~mod-mongo-persistor~2.1.0', config.mongo, config.mainStuff);
-depMod('sentiment~repository~1.0', config.mongo, config.mainStuff);
-
+depMod('oanda~stream~1.0', config.stream, config.startLiveStream);
+depMod('web~server~1.0', config.web, config.startWebServer);
+depMod('io.vertx~mod-mongo-persistor~2.1.0', config.mongo, config.startMongo);
+depMod('sentiment~repository~1.0', config.mongo, config.startSentimentRepo);
+depMod('sentiment~trader~1.0', config.trader, config.startSentimentTrader);
 depMod('sentiment~tester~1.0', config.web, config.sendTestMessages);
 depMod('oanda~history~1.0', config.history, config.startHistory);
 

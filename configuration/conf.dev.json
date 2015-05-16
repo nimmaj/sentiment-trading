@@ -23,8 +23,15 @@
     "period": 5,
     "timeMode": "historic"
   },
-  "sendTestMessages": false,
-  "mainStuff": true,
-  "startHistory": true,
-  "startTime": true
+  "trader": {
+    "confidenceMultiplier": 100
+  },
+  "sendTestMessages": true,
+  "startMongo": false,
+  "startHistory": false,
+  "startTime": false,
+  "startSentimentRepo": false,
+  "startSentimentTrader": true,
+  "startWebServer": true,
+  "startLiveStream": false
 }
