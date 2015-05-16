@@ -25,6 +25,8 @@ vertx.fileSystem.readFile(config.secretFile, function(err, res) {
 
     eb.registerHandler('historic.tick.request', function(event, reply) {
       // take time and instrument and return bid/ask message
+      console.log('got a historic tick request' + JSON.stringify(event));
+
       var inst = event.instrument;
       var start = encodeURIComponent(moment(event.date).format('YYYY-MM-DDTHH:mm:ss')+'Z');
       var path = '/v1/candles?accountId='+secret.accountId+'&instrument='+inst+'&count=1&start='+start;

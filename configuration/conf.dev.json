@@ -28,7 +28,7 @@
   },
   "sendTestMessages": true,
   "startMongo": false,
-  "startHistory": false,
+  "startHistory": true,
   "startTime": false,
   "startSentimentRepo": false,
   "startSentimentTrader": true,

@@ -23,7 +23,7 @@ var thingToSend = {
 }
 
 var streamTimer = vertx.setPeriodic(3000, function(timerId) {
-  thingToSend.timestamp = moment();
+  thingToSend.timestamp = moment().subtract(Math.random() * 100, 'd');
   thingToSend.type = (Math.random() < 0.5) ? "buy" : "sell";
   thingToSend.confidence = Math.random() * 100;
   client.post("/postSentiment", function(resp) {
