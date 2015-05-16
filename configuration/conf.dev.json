@@ -16,22 +16,23 @@
   "mongo": {
     "address": "mongo.sentiment",
     "db_name": "sentiment_db",
-    "use_mongo_types": "true"
+    "use_mongo_types": "true",
+    "mode": "replay"
   },
   "time": {
     "startTime": "2015-04-03T12:00",
-    "period": 5,
+    "period": 3600,
     "timeMode": "historic"
   },
   "trader": {
     "confidenceMultiplier": 100
   },
-  "sendTestMessages": true,
-  "startMongo": false,
-  "startHistory": true,
+  "sendTestMessages": false,
+  "startMongo": true,
+  "startHistory": false,
   "startTime": true,
-  "startSentimentRepo": false,
-  "startSentimentTrader": true,
-  "startWebServer": true,
+  "startSentimentRepo": true,
+  "startSentimentTrader": false,
+  "startWebServer": false,
   "startLiveStream": false
 }
