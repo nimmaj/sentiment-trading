@@ -18,7 +18,7 @@ eb.registerHandler('sentiment.event', function(message) {
 
   var date = moment(message.timestamp);
 
-  console.log('trade: '+ message.type + ' confidence: ' + message.confidence);
+  // console.log('trade: '+ message.type + ' confidence: ' + message.confidence);
 
   var req = {
     instrument: "GBP_USD",
@@ -47,6 +47,24 @@ eb.registerHandler('sentiment.event', function(message) {
     usd += usdChange;
     gbp += gbpChange;
 
+  });
+
+});
+
+eb.registerHandler('timer.tick', function(event) {
+  var req = {
+    instrument: "GBP_USD",
+    date: event
+  };
+  eb.send('historic.tick.request', req, function(reply) {
+    var response = {
+      gbp: gbp,
+      usd: usd,
+      total: (gbp + (usd / reply.ask)),
+      when: event
+    };
+    console.log('historic pos:' + JSON.stringify(response));
+    eb.publish('fx.historic.position', response);
   });
 
 });

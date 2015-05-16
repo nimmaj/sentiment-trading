@@ -29,7 +29,7 @@
   "sendTestMessages": true,
   "startMongo": false,
   "startHistory": true,
-  "startTime": false,
+  "startTime": true,
   "startSentimentRepo": false,
   "startSentimentTrader": true,
   "startWebServer": true,
