@@ -91,7 +91,7 @@ def usa_today(keyword, start, end, section='money'):
     return response
 
 def googletrends(keywords, start_month, start_year, duration=12, geo="US"):
-    # returns a list of headlines from USA Today
+    # Quta limit reached for 16/05 Don't call
     connector = pyGTrends.pyGTrends("rbshackathon@gmail.com", "RB$Hackathon" )
     querydate=str(start_month)+"/"+str(start_year)+" "+str(duration)+"m"
     print querydate
@@ -120,7 +120,6 @@ if __name__ == '__main__':
     now = datetime.now().isoformat(' ')
 
     requests.packages.urllib3.disable_warnings()
-    print googletrends("jobs", 4, 2008)
 
     assert post(author='rick',source='test_source',type='buy',confidence=50,description='unit test post',timestamp=now)
     assert oanda('EUR_USD')
