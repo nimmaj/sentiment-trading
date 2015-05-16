@@ -1,23 +1,19 @@
-port over to rbs hackathon user
-
-make the css in the page a bit nicer - switch away from cover to something else
-
 get it running in the cloud
-
-dockerfy it
-
-message checking - make sure we're storing something sensible
-
-some sort of time service
-
-display position
-
-work out how to do historic rates and to "replay" streaming at a specific pace
-
-make trade?
-
 work out how to get the data out of mongo and into the repo
 
+work out how the historic data oanda interface works
+work out how to do the over time bit
+work out how to do historic rates and to "replay" streaming at a specific pace from a specific time
+
+message checking - make sure we're storing something sensible
+some sort of time service
+display position/make trade service (trade confidence * 1000 gbp)
+
+
+display rates v. position over time (with events?)
+
+port over to rbs hackathon user
+dockerfy it
 
 
 
@@ -25,8 +21,6 @@ use cases:
 
  - normal streaming case with rest for harvesting
  - replay mode - (from here to here)
-
-
 
 
 
@@ -40,6 +34,7 @@ check in to repo
 extract api keys and check in config
 get mongo up and running and get something into it
 rest i/f to store messages into
+make the css in the page a bit nicer - switch away from cover to something else
 
 plan
 ----
