@@ -29,10 +29,10 @@
   },
   "sendTestMessages": false,
   "startMongo": true,
-  "startHistory": false,
+  "startHistory": true,
   "startTime": true,
   "startSentimentRepo": true,
-  "startSentimentTrader": false,
-  "startWebServer": false,
+  "startSentimentTrader": true,
+  "startWebServer": true,
   "startLiveStream": false
 }

@@ -1,3 +1,15 @@
+need to test the republisher - run in current state - should see a position change
+need to get the position stuff etc on to the presentation screen
+ - display current position values
+ - perhaps display last event
+
+make the historic screen kick off the historic data
+can we add some global variables to control the level of logging
+
+can we write something to find the best period to run for?
+ - actually just need to run for a series of different big steps and look at the results
+
+
 get it running in the cloud
 work out how to get the data out of mongo and into the repo
 
