@@ -21,10 +21,10 @@
   "time": {
     "startTime": "2015-04-03T12:00",
     "period": 5,
-    "timeMode": "live"
+    "timeMode": "historic"
   },
   "sendTestMessages": false,
   "mainStuff": false,
-  "startHistory": false,
+  "startHistory": true,
   "startTime": true
 }

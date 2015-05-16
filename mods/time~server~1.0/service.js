@@ -12,14 +12,15 @@ var period = config.period;
 
 var currentTime = moment();
 
-if (config.mode === 'historic') {
+if (config.timeMode === 'historic') {
+  console.log('historic mode');
   currentTime = moment(config.startTime);
 }
 
 console.log('starting from: '+currentTime+' with period '+period + 'seconds');
 
-var streamTimer = vertx.setPeriodic(period * 1000, function(timerId) {
+var streamTimer = vertx.setPeriodic(1000, function(timerId) {
   currentTime = currentTime.add(period, 's');
-  console.log('tick: '+currentTime.toString());
+  // console.log('tick: '+currentTime.toString());
   eb.publish('timer.tick',currentTime.toString());
 });

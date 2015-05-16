@@ -20,7 +20,7 @@ function depMod(name, conf, shouldStart) {
     console.log('not starting '+name);
   } else {
     console.log('starting '+name+' with config: ');
-    console.log(conf);
+    console.log(JSON.stringify(conf));
     container.deployModule(name, conf, function(err) {
       if (err) {
         console.log(err.getMessage());
