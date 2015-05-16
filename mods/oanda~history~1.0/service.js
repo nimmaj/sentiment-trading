@@ -23,9 +23,11 @@ vertx.fileSystem.readFile(config.secretFile, function(err, res) {
     var secret = JSON.parse(res.getString(0, res.length()).trim());
     var auth = 'Bearer '+secret.apiKey;
 
-    eb.registerHandler('timer.tick', function(event) {
-      var start = encodeURIComponent(moment(event).format('YYYY-MM-DDTHH:mm:ss')+'Z');
-      var path = '/v1/candles?accountId='+secret.accountId+'&instrument=GBP_USD&count=1&start='+start;
+    eb.registerHandler('historic.tick.request', function(event, reply) {
+      // take time and instrument and return bid/ask message
+      var inst = event.instrument;
+      var start = encodeURIComponent(moment(event.date).format('YYYY-MM-DDTHH:mm:ss')+'Z');
+      var path = '/v1/candles?accountId='+secret.accountId+'&instrument='+inst+'&count=1&start='+start;
       // var encodedPath = encodeURIComponent(path);
       //console.log(path);
       var request = client.get(path, function(resp) {
@@ -44,11 +46,21 @@ vertx.fileSystem.readFile(config.secretFile, function(err, res) {
             "time": candle.time
           }
 
-          eb.publish('fx.historic.tick', message);
+          reply(message);
         });
 
       }).putHeader("Authorization", auth).end();
 
+    });
+
+    eb.registerHandler('timer.tick', function(event) {
+      var req = {
+        instrument: "GBP_USD",
+        date: event
+      };
+      eb.send('historic.tick.request', req, function(reply) {
+        eb.publish('fx.historic.tick', reply);
+      });
     });
 
   }
