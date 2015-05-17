@@ -7,13 +7,41 @@ from pattern.web import Element
 from datetime import datetime
 from textblob import TextBlob
 from textblob.sentiments import NaiveBayesAnalyzer
+from textblob.classifiers import NaiveBayesClassifier
 
 def NaiveBayesAnalyzerParser(text):
+    
+    train =[('creates jobs', 'pos'),
+            ('create jobs', 'pos'),
+            ('created jobs', 'pos'),
+            ('new jobs', 'pos'),
+            ('jobs wanted', 'pos'),
+            ('jobs needed', 'pos'),
+            ('jobs call by', 'pos'),
+            ('unemployment falls', 'pos'),
+            ('bring jobs', 'pos'),
+            ('jobs comming', 'pos'),
+            ('unemployment drops', 'pos'),
+            ('cut jobs', 'neg'),
+            ('cutting jobs', 'neg'),
+            ('cuts jobs', 'neg'),
+            ('lost jobs', 'neg'),
+            ('job loss', 'neg'),
+            ('losing jobs', 'neg'),
+            ('lose jobs', 'neg'),
+            ('jobs not kept', 'neg'),
+            ('jobs trim', 'neg'),
+            ('unemployment rises', 'neg'),
+            ('drops', 'neg'),
+            ('drop', 'neg'),
+            ('dollar falls', 'neg'),
+        ]
+    cl = NaiveBayesClassifier(train)
     sentiment = TextBlob(text, analyzer=NaiveBayesAnalyzer()).sentiment
     #Sentiment(classification='pos', p_pos=0.6023632501327671, p_neg=0.3976367498672331)
     #print(sentiment)
     subjectivity = 1 - (max(sentiment.p_pos,sentiment.p_neg) - min(sentiment.p_pos,sentiment.p_neg))
-    if sentiment.classification == 'pos':
+    if cl.classify(text) == 'pos':
         return (sentiment.p_pos, subjectivity)
     else:
         return (sentiment.p_neg*-1, subjectivity)
