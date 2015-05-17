@@ -25,20 +25,24 @@ position.addTimeSeries(gbp, { strokeStyle: 'rgb(0, 255, 0)', fillStyle: 'rgba(0,
 position.addTimeSeries(usd, { strokeStyle: 'rgb(255, 0, 255)', fillStyle: 'rgba(255, 0, 255, 0.3)', lineWidth: 3 });
 position.streamTo(document.getElementById('gbp_usd_position'), 1000);
 
-var pnl = new SmoothieChart({ grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 1000, verticalSections: 6 },
+var pnlChart = new SmoothieChart({ grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 1000, verticalSections: 6 },
   labels: { precision: 4} ,
   millisPerPixel:50});
-pnl.addTimeSeries(pnl, { strokeStyle: 'rgb(0, 255, 0)', fillStyle: 'rgba(0, 255, 0, 0.4)', lineWidth: 3 });
-pnl.streamTo(document.getElementById('pnl'), 1000);
+pnlChart.addTimeSeries(pnl, { strokeStyle: 'rgb(0, 255, 0)', fillStyle: 'rgba(0, 255, 0, 0.4)', lineWidth: 3 });
+pnlChart.streamTo(document.getElementById('pnl'), 1000);
 
 function messageReceived(socketMessage) {
   var smo = JSON.parse(socketMessage.data);
   var topic = smo.topic;
   var message = smo.message;
 
-  console.log("got eur usd tick: " + message.bid + ' ' + message.ask);
-
-  bid.append(new Date().getTime(), message.bid);
-  ask.append(new Date().getTime(), message.ask);
-
+  if (topic === 'fx.historic.tick') {
+    // console.log("got eur usd tick: " + message.bid + ' ' + message.ask);
+    bid.append(new Date().getTime(), message.bid);
+    ask.append(new Date().getTime(), message.ask);
+  } else if (topic === 'fx.historic.position') {
+    usd.append(new Date().getTime(), message.usd);
+    gbp.append(new Date().getTime(), message.gbp);
+    pnl.append(new Date().getTime(), message.pnl);
+  }
 }

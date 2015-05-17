@@ -38,6 +38,7 @@ server.websocketHandler(function(socket) {
     registerWebSocketForTopic('fx.tick', socket);
   } else if (socket.path() === '/historicAnalysis') {
     registerWebSocketForTopic('fx.historic.tick', socket);
+    registerWebSocketForTopic('fx.historic.position', socket);
   }
 
 });

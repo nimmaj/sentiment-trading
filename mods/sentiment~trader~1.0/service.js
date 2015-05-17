@@ -14,6 +14,9 @@ var gbp = 100000;
 var usd = 100000;
 var leverage = config.confidenceMultiplier;
 
+var originalPositionNotInitialised = true;
+var originalPosition = 0;
+
 eb.registerHandler('sentiment.event', function(message) {
 
   var date = moment(message.timestamp);
@@ -57,10 +60,18 @@ eb.registerHandler('timer.tick', function(event) {
     date: event
   };
   eb.send('historic.tick.request', req, function(reply) {
+    var newTotal = gbp + (usd / reply.ask);
+
+    if (originalPositionNotInitialised) {
+      originalPosition = newTotal;
+      originalPositionNotInitialised = false;
+    }
+
     var response = {
       gbp: gbp,
       usd: usd,
-      total: (gbp + (usd / reply.ask)),
+      total: newTotal,
+      pnl: (newTotal - originalPosition),
       when: event
     };
     console.log('historic pos:' + JSON.stringify(response));
