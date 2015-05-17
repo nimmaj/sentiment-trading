@@ -1,9 +1,4 @@
 
-need to get the position stuff etc on to the presentation screen
- - display current position values
- - perhaps display last event
-
-make the historic screen kick off the historic data
 can we add some global variables to control the level of logging
 
 cache historic trade reqs
@@ -11,9 +6,7 @@ cache historic trade reqs
 can we write something to find the best period to run for?
  - actually just need to run for a series of different big steps and look at the results
 
-
 work out how to get the data out of mongo and into the repo
-
 
 message checking - make sure we're storing something sensible
 
@@ -50,6 +43,11 @@ work out how to do the over time bit
 work out how to do historic rates and to "replay" streaming at a specific pace from a specific time
 some sort of time service
 display position/make trade service (trade confidence * 1000 gbp)
+need to get the position stuff etc on to the presentation screen
+ - display current position values
+ - perhaps display last event
+
+make the historic screen kick off the historic data
 
 plan
 ----
