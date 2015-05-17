@@ -26,6 +26,7 @@ all of which helps us to componentise work which helps us not step on each other
 toes during the very short hack
 * R - mark made extensive use of R to understand the times around the non-farm
 payroll events
+* OANDA - awesome streaming rates and fx trading
 * Bootstrap - a huge time saver when knocking up websites
 * Streaming graphs from Smoothie.js - I'm a huge fan of the awesome Joe Walnes
 and Drew Noakes - thanks for these fun components!
