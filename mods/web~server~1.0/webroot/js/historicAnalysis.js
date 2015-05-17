@@ -40,6 +40,10 @@ function messageReceived(socketMessage) {
     // console.log("got eur usd tick: " + message.bid + ' ' + message.ask);
     bid.append(new Date().getTime(), message.bid);
     ask.append(new Date().getTime(), message.ask);
+  } else if (topic === 'timer.tick') {
+    var dt = moment(message);
+    document.getElementById("historicDate").textContent = dt.format('YYYY-MM-DD');
+    document.getElementById("historicTime").textContent = dt.format('HH:mm:ss');
   } else if (topic === 'fx.historic.position') {
     usd.append(new Date().getTime(), message.usd);
     gbp.append(new Date().getTime(), message.gbp);
