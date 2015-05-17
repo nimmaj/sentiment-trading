@@ -1,4 +1,4 @@
-need to test the republisher - run in current state - should see a position change
+
 need to get the position stuff etc on to the presentation screen
  - display current position values
  - perhaps display last event
@@ -6,28 +6,21 @@ need to get the position stuff etc on to the presentation screen
 make the historic screen kick off the historic data
 can we add some global variables to control the level of logging
 
+cache historic trade reqs
+
 can we write something to find the best period to run for?
  - actually just need to run for a series of different big steps and look at the results
 
 
-get it running in the cloud
 work out how to get the data out of mongo and into the repo
 
-work out how the historic data oanda interface works
-work out how to do the over time bit
-work out how to do historic rates and to "replay" streaming at a specific pace from a specific time
 
 message checking - make sure we're storing something sensible
-some sort of time service
-display position/make trade service (trade confidence * 1000 gbp)
-
 
 display rates v. position over time (with events?)
 
 port over to rbs hackathon user
 dockerfy it
-
-
 
 use cases:
 
@@ -47,6 +40,13 @@ extract api keys and check in config
 get mongo up and running and get something into it
 rest i/f to store messages into
 make the css in the page a bit nicer - switch away from cover to something else
+get it running in the cloud
+need to test the republisher - run in current state - should see a position  - historic working - why no repo stuff?
+work out how the historic data oanda interface works
+work out how to do the over time bit
+work out how to do historic rates and to "replay" streaming at a specific pace from a specific time
+some sort of time service
+display position/make trade service (trade confidence * 1000 gbp)
 
 plan
 ----
