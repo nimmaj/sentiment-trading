@@ -36,7 +36,7 @@ server.websocketHandler(function(socket) {
 
   if (socket.path() === '/liveStream') {
     registerWebSocketForTopic('fx.tick', socket);
-  } else if (socket.path() === '/presentationStream') {
+  } else if (socket.path() === '/historicAnalysis') {
     registerWebSocketForTopic('fx.historic.tick', socket);
   }
 
@@ -44,9 +44,13 @@ server.websocketHandler(function(socket) {
 
 function registerWebSocketForTopic(topic, socket) {
   var streamHandler = function(tick) {
-    var tickStr = JSON.stringify(tick);
+    var message = {
+      "topic": topic,
+      "message": tick
+    }
+    var messageStr = JSON.stringify(message);
     //console.log('ws: ' + tickStr);
-    socket.writeTextFrame(tickStr);
+    socket.writeTextFrame(messageStr);
   }
 
   eb.registerHandler(topic, streamHandler);

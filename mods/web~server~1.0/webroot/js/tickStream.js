@@ -6,8 +6,10 @@ function connectToSocket(wsPath) {
 
 var graphs = new Map();
 
-function tickReceived(tickMessage) {
-  var tick = JSON.parse(tickMessage.data);
+function tickReceived(socketMessage) {
+  var smo = JSON.parse(socketMessage.data);
+  var tick = smo.message;
+  // var tick = JSON.parse(tickMessage.data);
 
   if (!graphs.has(tick.instrument)) {
     console.log("adding new graph section for: "+tick.instrument);
