@@ -37,6 +37,7 @@ server.websocketHandler(function(socket) {
   if (socket.path() === '/liveStream') {
     registerWebSocketForTopic('fx.tick', socket);
   } else if (socket.path() === '/historicAnalysis') {
+    eb.publish('reset.everything','now');
     registerWebSocketForTopic('fx.historic.tick', socket);
     registerWebSocketForTopic('fx.historic.position', socket);
     registerWebSocketForTopic('timer.tick', socket);
