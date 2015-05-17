@@ -48,6 +48,8 @@ function messageReceived(socketMessage) {
     usd.append(new Date().getTime(), message.usd);
     gbp.append(new Date().getTime(), message.gbp);
     pnl.append(new Date().getTime(), message.pnl);
-    document.getElementById("pnlValue").textContent = message.pnl;
+    document.getElementById("pnlValue").textContent = message.pnl.toFixed(2);
+  } else if (topic === 'sentiment.event') {
+
   }
 }

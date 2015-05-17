@@ -63,13 +63,23 @@
         <div class="col-md-1"></div>
         <div class="col-md-6">
           <h5>GBP_USD - historic rates</h5>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+          <h5>Current Tick</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
           <canvas id="bid_ask" width="600" height="150"></canvas>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-4">
           <div>
-            <h5  class="align-centre" id="historicDate"></h5>
-            <h5 id="historicTime"></h5>
+            <p id="historicDate"></p>
+            <p id="historicTime"></p>
           </div>
         </div>
       </div>
@@ -78,21 +88,47 @@
         <div class="col-md-1"></div>
         <div class="col-md-6">
           <h5>GBP and USD position</h5>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+          <h5>Last Event</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
           <canvas id="gbp_usd_position" width="600" height="150"></canvas>
         </div>
-        <div class="col-md-4">Last event name and Date</div>
         <div class="col-md-1"></div>
+        <div class="col-md-4">
+          <p>Time  : <span id="seTime">n/a</span></p>
+          <p>Source: <span id="seSource">n/a</span></p>
+          <p>Type  : <span id="seType">n/a</span></p>
+          <p>Conf  : <span id="seConf">n/a</span></p>
+          <p>Desc  : <span id="seDesc">n/a</span></p>
+        </div>
       </div>
 
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-6">
           <h5>Profit and Loss (GBP)</h5>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+          <h5>Current PNL</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
           <canvas id="pnl" width="600" height="150"></canvas>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-4">
-          <h5 id="pnlValue"></h5>
+          <p>£<span id="pnlValue"></span></p>
         </div>
       </div>
 
