@@ -20,8 +20,8 @@
     "mode": "replay"
   },
   "time": {
-    "startTime": "2015-04-03T12:00",
-    "period": 3600,
+    "startTime": "2015-03-03T00:00",
+    "period": 7200,
     "timeMode": "historic"
   },
   "trader": {
