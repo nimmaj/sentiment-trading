@@ -1,6 +1,7 @@
 # Sentiment Trading
 
 Static web content is hosted on GitHub Pages - (http://nimmaj.github.io/sentiment-trading/)
+note that the demo isn't static so doesn't do much unless you run the app...
 
 Having won the Deloitte Gone Hacking Hackathon last November, there's basically
 no chance of us getting any prize this time, so we tipped up to have some fun!
