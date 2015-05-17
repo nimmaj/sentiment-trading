@@ -79,6 +79,13 @@ db.event.find()
 db.event.remove( {} )
 ```
 
+```
+db.event.aggregate(
+   { $group: { _id: { $week: "$timestamp"},
+               click: { $sum: 1 } } }
+   )
+```
+
 # Parsing scripts
 For backtesting and historic event parsing you need Python2.7
 ```
