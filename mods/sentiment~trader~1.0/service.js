@@ -10,12 +10,19 @@ var config = container.config;
 
 console.log('starting sentiment trader...');
 
+var leverage = config.confidenceMultiplier;
 var gbp = 100000;
 var usd = 100000;
-var leverage = config.confidenceMultiplier;
-
 var originalPositionNotInitialised = true;
 var originalPosition = 0;
+
+function reinitialise() {
+  gbp = 100000;
+  usd = 100000;
+  originalPositionNotInitialised = true;
+  originalPosition = 0;
+  console.log('reinitialised trading service');
+}
 
 eb.registerHandler('sentiment.event', function(message) {
 
@@ -78,4 +85,8 @@ eb.registerHandler('timer.tick', function(event) {
     eb.publish('fx.historic.position', response);
   });
 
+});
+
+eb.registerHandler('reset.everything', function(message) {
+  reinitialise();
 });

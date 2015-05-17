@@ -1,5 +1,7 @@
 # Sentiment Trading
 
+Static web content is hosted on GitHub Pages - (http://nimmaj.github.io/sentiment-trading/)
+
 Having won the Deloitte Gone Hacking Hackathon last November, there's basically
 no chance of us getting any prize this time, so we tipped up to have some fun!
 
@@ -32,11 +34,16 @@ payroll events
 and Drew Noakes - thanks for these fun components!
 * Python - Richard has this strange fascination with his python - we're hoping
 counselling might help... ;-)
+* NLTK - Standing on the broad shoudlers of all the great work that has gone into the [Natural Language Toolkit] (http://www.nltk.org/)
 * The Dovetail - one of the finest purveyors of ludicrously strong Belgian beer
 in London!
 
 Huge thanks to the Deloitte Digital/Capital Markets GoneHacking team who have
 once again made this a fantastic, and fun, event.  
+
+# Overview
+![architecture](https://github.com/nimmaj/sentiment-trading/blob/master/mods/web~server~1.0/webroot/images/NLPprocessing.png  "Sentiment Trdaing Architecture")
+
 
 # To run...
 
@@ -70,4 +77,10 @@ use sentiment_db
 show collections
 db.event.find()
 db.event.remove( {} )
+```
+
+# Parsing scripts
+For backtesting and historic event parsing you need Python2.7
+```
+python /parser/parsing.py
 ```

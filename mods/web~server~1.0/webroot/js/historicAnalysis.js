@@ -42,7 +42,7 @@ function messageReceived(socketMessage) {
     ask.append(new Date().getTime(), message.ask);
   } else if (topic === 'timer.tick') {
     var dt = moment(message);
-    document.getElementById("historicDate").textContent = dt.format('YYYY-MM-DD');
+    document.getElementById("historicDate").textContent = dt.format('YYYY-MM-DD (ddd)');
     document.getElementById("historicTime").textContent = dt.format('HH:mm:ss');
   } else if (topic === 'fx.historic.position') {
     usd.append(new Date().getTime(), message.usd);
@@ -54,6 +54,6 @@ function messageReceived(socketMessage) {
     document.getElementById("seSource").textContent = message.source;
     document.getElementById("seType").textContent = message.type;
     document.getElementById("seConf").textContent = message.confidence.toFixed(2);
-    document.getElementById("seDesc").textContent = message.description;
+    document.getElementById("seDesc").textContent = message.description.substring(0,30);
   }
 }
