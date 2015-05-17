@@ -1,4 +1,7 @@
 
+fix the fact that only the last event bus handler unregisters so you get errors post closing the socket
+
+
 can we add some global variables to control the level of logging
 
 cache historic trade reqs
