@@ -19,7 +19,10 @@ message checking - make sure we're storing something sensible
 
 display rates v. position over time (with events?)
 
-port over to rbs hackathon user
+
+is there a way we can share libs and config between all the modules
+
+
 dockerfy it
 
 use cases:
