@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Sentiment FX Trading: Historic Rates</title>
+    <title>Sentiment FX Trading</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -39,13 +40,13 @@
           <ul class="nav navbar-nav">
             <li><a href="./index.html">Home</a></li>
             <li><a href="./nonFarmPayroll.html">Non-Farm Payroll</a></li>
-            <li><a href="./provenCorrelation.html">Proven Correlation</a></li>
+            <li class="active"><a href="./provenCorrelation.html">Proven Correlation</a></li>
             <li><a href="./nlpForPrediction.html">NLP Prediction</a></li>
-            <li class="active"><a href="./historicAnalysis.html">Demo</a></li>
+            <li><a href="./historicAnalysis.html">Demo</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="./nlpForPrediction.html"><span class="glyphicon glyphicon-circle-arrow-left"></span></a></li>
-            <li class="disabled"><a><span class="glyphicon glyphicon-circle-arrow-right"></span></a></li>
+            <li class="active"><a href="./nonFarmPayroll.html"><span class="glyphicon glyphicon-circle-arrow-left"></span></a></li>
+            <li class="active"><a href="./nlpForPrediction.html"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -56,59 +57,35 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Streaming Historic FX Rates</h1>
+        <h1>Sentiment FX Trading</h1>
+        <p>One of the biggest days in the FX trading calendar is the US non-farm payroll day.  RBS does many thousands of trades in the
+        moments after the announcement.</p>
+        <p>Non-farm payroll is essentially about jobs.  This is something that you can find out about from social media - people talk about
+        losing jobs.</p>
+        <p>Logically we ought to be able to use this to take a position in fx.
+        </p>
       </div>
 
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-6">
-          <h5>GBP_USD - historic rates</h5>
-          <canvas id="bid_ask" width="600" height="150"></canvas>
-        </div>
-        <div class="col-md-4">
-          <div class=
-            <h5 id="historicDate"></h5>
-            <h5 id="historicTime"></h5>
-          </div>
-        </div>
-        <div class="col-md-1"></div>
-      </div>
+      <div class="row marketing">
 
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-6">
-          <h5>GBP and USD position</h5>
-          <canvas id="gbp_usd_position" width="600" height="150"></canvas>
-        </div>
-        <div class="col-md-4">Last event name and Date</div>
-        <div class="col-md-1"></div>
-      </div>
+              <div class="col-lg-6">
+                <h4 class="text-center">GBPUSD, Friday 3rd April 2015</h4>
+                <img src="images/3rd April GBPUSD.png" class="img-rounded" alt="Cinque Terre" width="550" height="426" />
+              </div>
 
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-6">
-          <h5>Profit and Loss (GBP)</h5>
-          <canvas id="pnl" width="600" height="150"></canvas>
-        </div>
-        <div class="col-md-4">Last event position change</div>
-        <div class="col-md-1"></div>
-      </div>
+              <div class="col-lg-6">
+                <h4 class="text-center">EURUSD, Friday 3rd April 2015</h4>
+                <img src="images/3rd April EURUSD.png" class="img-rounded" alt="Cinque Terre" width="550" height="426" />
+              </div>
+            </div>
 
     </div> <!-- /container -->
 
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">Graphs from smoothiejs, rates streaming live from OandA</p>
-      </div>
-    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/smoothie.js"></script>
-    <script type="text/javascript" src="./js/moment.js"></script>
-    <script type="text/javascript" src="./js/historicAnalysis.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
   </body>
 </html>
