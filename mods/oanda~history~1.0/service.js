@@ -50,6 +50,8 @@ vertx.fileSystem.readFile(config.secretFile, function(err, res) {
             "time": candle.time
           }
 
+          console.log('returning historic tick');
+
           reply(message);
         });
 

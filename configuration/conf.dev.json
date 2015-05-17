@@ -34,5 +34,5 @@
   "startSentimentRepo": true,
   "startSentimentTrader": true,
   "startWebServer": true,
-  "startLiveStream": false
+  "startLiveStream": true
 }
