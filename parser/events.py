@@ -1,6 +1,9 @@
 import requests
 import pyGTrends
+import csv
+import urllib
 from pattern.en import sentiment
+from pattern.web import Element
 from datetime import datetime
 
 def post(**kwargs):
@@ -96,25 +99,158 @@ def googletrends(keywords, start_month, start_year, duration=12, geo="US"):
     # Quta limit reached for 16/05 Don't call
     connector = pyGTrends.pyGTrends("rbshackathon@gmail.com", "RB$Hackathon" )
     querydate=str(start_month)+"/"+str(start_year)+" "+str(duration)+"m"
-    print querydate
+    #print querydate
     connector.download_report(keywords,geo=geo,date=querydate)
-    
-    result = connector.csv().split("\n")
+    result = []
+    try:
+        result = connector.csv().split("\n")
+    except Exception as e:
+        if  "Could not find requested section" in e.__str__():
+            with open("data/googletrends.csv", 'rb') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    result.append(row[0]+","+row[1])
+                #print result
+        
     del result[0]
     response = []
+    previousnumber = 100
     for r in result:
         s = r.split(" ")
         date = datetime.strptime(s[0], '%Y-%m-%d')
         number = s[2].split(",")[1]
-        text = keywords + "has been searched " + number + " times on Google this week" 
+        diff = int(number) - previousnumber
+        text=""
+        if diff >= 0:
+            text = "The search for " + keywords+ " has increased "+ str(diff) + "%" +" on Google this week"
+        else:
+            text = "The search for " + keywords+ " has decreased "+ str(diff) + "%" +" on Google this week"
         response += [{
             'timestamp': date.isoformat(' '),
             'description': text,
             'source':'google',
             'author':'zhuangy', 
-            'sentiment': number
+            'sentiment': sentiment(text)
         }]
-    return response 
+        previousnumber = int(number)
+    #print len(response)
+    return response
+
+def googlenewscomparor(title, previoustitle):
+    x = set()
+    y = set()
+    for a in title:
+        x.add(a.content)
+    for b in previoustitle:
+        y.add(b.content)
+    return x==y
+        
+
+def googlenews(keyword, start, end):
+    url = 'https://www.google.com/search?'
+    searchdate = "cd_min:"+start+",cd_max:"+end
+    continueindicator = True
+    response = []
+    pagenumber = 0
+    previoustitle=[];
+    while continueindicator:   
+        payload = {
+            'q': keyword,
+            'hl': 'en',
+            'tbs':'sbd:1,nsd:0,cdr:1,'+searchdate,
+            'tbas':0,
+            'tbm':'nws',
+            'start':pagenumber,
+            'source':'lnt'
+        }
+        realurl=url+urllib.urlencode(payload)
+        r = requests.get(realurl, verify=False)
+        print r.url
+        if r.status_code != 200:
+            raise Exception('request failed')
+        root = Element(r.text)
+        title=root('div[class="st"]')
+        for a in title:
+            for pa in previoustitle:
+                if googlenewscomparor(title, previoustitle):
+                    continueindicator = False
+                    #print a.content
+                    #print
+                    #print pa.content
+                    break
+            if continueindicator == False:
+                break
+                
+            else:
+                md=Element(a.previous)
+                metadata=md('span[class="f"]')[0].content.split(" - ")
+                #Parse Date
+                date=None
+                if "ago" not in metadata[-1]:
+                    date = datetime.strptime(metadata[-1], '%d %b %Y')
+                else:
+                    dates = metadata[-1].split(" ")
+                    if dates[2] == "day":
+                        date = datetime.today() - timedelta(days=int(dates[0]))
+                    else:
+                        date = datetime.today()
+                #Parse Title
+                text=a.content.replace("<b>","").replace("</b>","").replace("&nbsp;...","")
+                
+                response += [{
+                    'timestamp': date.isoformat(' '),
+                    'description': text,
+                    'source': metadata[0],
+                    'author':'zhuangy', 
+                    'sentiment': sentiment(text)
+                     }]
+        previoustitle = title
+        pagenumber= pagenumber+10
+        #print continueindicator, pagenumber
+    
+    return response
+
+
+def newslookup(keyword, year):
+    # returns a list of headlines from News Lookup
+    url = 'http://www.newslookup.com/results?'
+    continueindicator = True
+    pagenumber = 0
+    response = []
+    while continueindicator:
+        payload = {
+            'q': keyword,
+            'p': pagenumber,
+            'ps' : 10,
+            'hs' : 1,
+            'tp' : "" ,
+            'cat': 'gi100',
+        }
+        if int(year) != 2015:
+            payload['s']="tY"+year
+        r = requests.get(url, params=payload, verify=False)
+        if r.status_code != 200:
+            raise Exception('request failed')    
+        #print r.url
+        root = Element(r.text)
+        title=root('a[class="title"]')
+        if len(title) < 1:
+            break
+        datet = root('span[class="stime"]')
+        for a in range(len(title)):
+            text=title[a].content
+            date= datetime.strptime(datet[a].content, ' | %a %b %d, %Y %H:%M UTC') # Sat Dec 04, 2010 15:40 UTC
+            response += [{
+                'timestamp': date.isoformat(' '),
+                'description': text,
+                'source':"newslookup",
+                'author':'zhuangy', 
+                'sentiment': sentiment(text)
+            }]
+
+        pagenumber=pagenumber+1
+        #print pagenumber, len(title), len(response)
+    return response
 
 
 if __name__ == '__main__':
@@ -127,4 +263,7 @@ if __name__ == '__main__':
     assert oanda('EUR_USD')
     assert xignite('4/15/2015','4/16/2015')
     assert usa_today('job','2015-05-13','2015-05-14')
+    assert newslookup("jobs", "2015")
+    assert googletrends("jobs","US","1/2004 120m") 
+    #assert googlenews("us jobs", "01/01/2014", "02/04/2014")
 
